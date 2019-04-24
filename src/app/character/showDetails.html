@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <table>
+    <tr>
+      <td>Episode</td>
+      <td>{{ data.episode_id }}</td>
+    </tr>
+    <tr>
+      <td>Opening Crawl</td>
+      <td>{{ data.opening_crawl }}</td>
+    </tr>
+    <tr>
+      <td>Director</td>
+      <td>{{ data.director }}</td>
+    </tr>
+    <tr>
+      <td>Producer</td>
+      <td>{{ data.producer }}</td>
+    </tr>
+  </table>
+</div>
+<br>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Got it</button>
+</div>

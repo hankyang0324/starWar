@@ -1,0 +1,22 @@
+<div>
+  <table >
+    <tr>
+      <th>Title</th>
+      <th>Release Date</th>
+      <th>Details</th>
+    </tr>
+    <tr *ngFor='let film of films;let i = index'>
+      <td>
+          {{ film.title }}
+      </td>
+      <td>
+          {{ film.date | date:'fullDate' }}
+      </td>
+      <td class='tdButton'>
+        <button class="btn btn-primary" (click)='openDialog(i)'> 
+          more
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

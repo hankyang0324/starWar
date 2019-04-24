@@ -1,0 +1,36 @@
+table {
+    margin-top: 30px;
+    box-sizing:border-box; 
+    width:100%;
+    border-bottom: 1px solid lightgray;
+    font-size: 18px;
+}
+
+th {
+    border-bottom: 1px solid lightgray;
+}
+
+th:nth-child(3) {
+    text-align: right;
+    padding-right: 10px;
+}
+
+th,td {
+    width:40%;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:5px;
+}
+
+td:nth-child(3) {
+    text-align: right;
+    padding-right: 10px;
+}
+
+tr:nth-child(odd) {
+    background: rgb(240, 240, 240);
+}
+
+tr:nth-child(1) {
+    background: transparent;
+}
