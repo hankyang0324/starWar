@@ -1,5 +1,8 @@
 <div>
-  <table >
+  <div class='spinnerDiv' *ngIf='isLoading'>
+    <mat-spinner></mat-spinner>
+  </div>
+  <table  *ngIf='!isLoading'>
     <tr>
       <th>Title</th>
       <th>Release Date</th>
@@ -10,7 +13,7 @@
           {{ film.title }}
       </td>
       <td>
-          {{ film.date | date:'fullDate' }}
+          {{ film.release_date | date:'fullDate' }}
       </td>
       <td class='tdButton'>
         <button class="btn btn-primary" (click)='openDialog(i)'> 

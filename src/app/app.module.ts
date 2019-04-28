@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatButtonModule, MatDialogModule } from "@angular/material";
+import { MatButtonModule, MatDialogModule, MatProgressSpinnerModule } from "@angular/material";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { StartComponent } from './start/start.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent],

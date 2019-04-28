@@ -12,25 +12,33 @@ import { Subscription } from 'rxjs';
 export class CharacterComponent implements OnInit, OnDestroy {
   id:string;
   character:{name:string,url:string};
-  films:{title:string,date:Date,episode_id:string,opening_crawl:string,director:string,producer:string}[];
+  films:{title:string,release_date:Date,episode_id:string,opening_crawl:string,director:string,producer:string}[];
   showDetails:boolean = false;
+  isLoading:boolean = true;
+  subscriptionRout:Subscription;
+  subscriptionChar:Subscription;
   subscriptionFilm:Subscription;
+  subscriptionFork:Subscription;
 
   constructor(private router:Router,private activeRoute:ActivatedRoute, private characterDataService:CharacterDataService,
     public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.activeRoute.params.subscribe(params => {
+    this.subscriptionRout=this.activeRoute.params.subscribe(params => {
+      this.isLoading = true;
       this.id = params['id'];
       if('0'>this.id || this.id>'3') {
         this.router.navigate(['']);
         return;
       }
-      this.characterDataService.characters.subscribe(data => {
-        this.character = data[this.id];
+      this.subscriptionChar=this.characterDataService.characters.subscribe(character => {
+        this.character = character[this.id];
         if(this.character){
-          this.subscriptionFilm = this.characterDataService.getFilms(this.character.url).subscribe(films=>{
-            this.films = films;
+          this.subscriptionFilm = this.characterDataService.getFilms(this.character.url).subscribe(forkjoin=>{
+            this.subscriptionFork = forkjoin.subscribe(films => {
+              this.isLoading = false;
+              this.films = films;
+            })
           });
         }
       })
@@ -45,7 +53,10 @@ export class CharacterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptionFilm.unsubscribe();
+    if(this.subscriptionFork) this.subscriptionFork.unsubscribe();
+    if(this.subscriptionFilm) this.subscriptionFilm.unsubscribe();
+    if(this.subscriptionChar) this.subscriptionChar.unsubscribe();
+    if(this.subscriptionRout) this.subscriptionRout.unsubscribe();
   }
 }
 
@@ -63,5 +74,4 @@ export class ShowDetails {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
